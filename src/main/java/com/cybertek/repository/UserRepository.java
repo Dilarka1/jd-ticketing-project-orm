@@ -1,12 +1,11 @@
 package com.cybertek.repository;
 
-import com.cybertek.entity.Role;
+import com.cybertek.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface UserRepository  extends JpaRepository<User, Long> {
 
-    Role findByDescription(String description);
-
+    User findByUserName(String username);
 }
