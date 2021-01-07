@@ -12,26 +12,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
     @RequestMapping("/archive")
     public class ArchiveController {
 
-        @Autowired
-        ProjectService projectService;
-
-        @Autowired
-        UserService userService;
-
-        @Autowired
-        TaskService taskService;
-
-        @Autowired
-        TaskService service;
+//        @Autowired
+//        ProjectService projectService;
+//
+//        @Autowired
+//        UserService userService;
+//
+//        @Autowired
+//        TaskService taskService;
+//
+//        @Autowired
+//        TaskService service;
 
         @GetMapping("/create")
         public String createArchive(Model model) {
 
             model.addAttribute("task", new TaskDTO());
-            model.addAttribute("projects", projectService.findAll());
-            model.addAttribute("employees", userService.findEmployees());
-            model.addAttribute("tasks", taskService.findAll());
-            model.addAttribute("status", service.findAll());
+//            model.addAttribute("projects", projectService.findAll());
+//            model.addAttribute("employees", userService.findEmployees());
+//            model.addAttribute("tasks", taskService.findAll());
+//            model.addAttribute("status", service.findAll());
 
 
             return "archive/create";

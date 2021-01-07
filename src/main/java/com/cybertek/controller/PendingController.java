@@ -12,26 +12,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/employee")
 public class PendingController {
 
-    @Autowired
-    ProjectService projectService;
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    TaskService taskService;
-
-    @Autowired
-    TaskService service;
+//    @Autowired
+//    ProjectService projectService;
+//
+//    @Autowired
+//    UserService userService;
+//
+//    @Autowired
+//    TaskService taskService;
+//
+//    @Autowired
+//    TaskService service;
 
     @GetMapping("/pending")
     public String createPending(Model model) {
 
         model.addAttribute("task", new TaskDTO());
-        model.addAttribute("projects", projectService.findAll());
-        model.addAttribute("employees", userService.findEmployees());
-        model.addAttribute("tasks", taskService.findAll());
-        model.addAttribute("status", service.findAll());
+//        model.addAttribute("projects", projectService.findAll());
+//        model.addAttribute("employees", userService.findEmployees());
+//        model.addAttribute("tasks", taskService.findAll());
+//        model.addAttribute("status", service.findAll());
 
 
         return "employee/pending";
@@ -40,7 +40,7 @@ public class PendingController {
     @PostMapping("/pending")
     public String insertStatus(Model model, TaskDTO task){
 
-        taskService.save(task);
+    //    taskService.save(task);
 
         return "redirect:/employee/pending";
     }

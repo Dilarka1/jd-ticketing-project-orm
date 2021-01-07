@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationPropertiesBinding
-public class ProjectDTOConverter implements Converter<String, ProjectDTO> {
+public class ProjectDTOConverter {//implements Converter<String, ProjectDTO> {
 
 //    @Autowired
 //    ProjectService projectService;
