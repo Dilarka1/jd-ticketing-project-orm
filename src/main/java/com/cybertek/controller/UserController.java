@@ -50,10 +50,6 @@ public class UserController {
 
         userService.update(user);
 
-        model.addAttribute("user", new UserDTO());
-        model.addAttribute("roles", roleService.findAll());
-        model.addAttribute("users", userService.findAll());
-
         return "redirect:/user/create";
 
     }
