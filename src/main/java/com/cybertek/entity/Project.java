@@ -22,7 +22,7 @@ public class Project extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
-    private User assingedManager;
+    private User assignedManager;
 
     private LocalDate startDate;
     private LocalDate endDate;
