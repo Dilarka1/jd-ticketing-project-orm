@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @ToString
 public class ProjectDTO {
 
+    private Long id;
     private String projectName;
     private String projectCode;
     private UserDTO assignedManager;

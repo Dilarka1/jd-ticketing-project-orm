@@ -10,15 +10,15 @@ public class TaskMapper {
 
     private ModelMapper modelMapper;
 
-    public TaskMapper(ModelMapper modelMapper){
+    public TaskMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
     public Task convertToEntity(TaskDTO dto){
-        return modelMapper.map(dto, Task.class);
+        return modelMapper.map(dto,Task.class);
     }
 
     public TaskDTO convertToDTO(Task entity){
-        return modelMapper.map(entity, TaskDTO.class);
+        return modelMapper.map(entity,TaskDTO.class);
     }
 }
