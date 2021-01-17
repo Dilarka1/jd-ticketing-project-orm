@@ -3,6 +3,7 @@ package com.cybertek.implementation;
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.TaskDTO;
 import com.cybertek.entity.Task;
+import com.cybertek.entity.User;
 import com.cybertek.mapper.ProjectMapper;
 import com.cybertek.mapper.TaskMapper;
 import com.cybertek.repository.TaskRepository;
@@ -92,7 +93,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteByProject(ProjectDTO project) {
-        List<TaskDTO>taskDTOS = listAllByProject(project);
+        List<TaskDTO> taskDTOS = listAllByProject(project);
         taskDTOS.forEach(taskDTO -> delete(taskDTO.getId()));
     }
 
@@ -101,5 +102,12 @@ public class TaskServiceImpl implements TaskService {
         return list.stream().map(obj -> {
             return taskMapper.convertToDTO(obj);
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TaskDTO> listAllTasksByStatusIsNot(Status status) {
+        User user = userRepository.findByUserName("toma@ct.com");
+        List<Task> list = taskRepository.findAllByTaskStatusIsNotAndAssignedEmployee(status, user);
+        return list.stream().map(taskMapper::convertToDTO).collect(Collectors.toList());
     }
 }

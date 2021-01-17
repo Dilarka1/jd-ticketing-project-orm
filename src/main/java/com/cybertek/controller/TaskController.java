@@ -6,12 +6,15 @@ import com.cybertek.service.TaskService;
 import com.cybertek.service.UserService;
 import com.cybertek.utils.Status;
 
+import org.apache.catalina.LifecycleState;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/task")
@@ -72,5 +75,13 @@ public class TaskController {
 
         return "redirect:/task/create";
 
+    }
+
+    @GetMapping("/employee")
+    public String edit(Model model){
+        List<TaskDTO> tasks = taskService.listAllTasksByStatusIsNot(Status.COMPLETE);
+        model.addAttribute("tasks", tasks);
+
+        return "task/employee-tasks";
     }
 }
