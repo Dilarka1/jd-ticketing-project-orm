@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
@@ -41,22 +40,24 @@ public class ProjectController {
     @PostMapping("/create")
     public String insertProject(ProjectDTO project) {
         projectService.save(project);
-        project.setProjectStatus(Status.OPEN);
         return "redirect:/project/create";
 
     }
 
     @GetMapping("/delete/{projectcode}")
     public String deleteProject(@PathVariable("projectcode") String projectcode) {
+
         projectService.delete(projectcode);
         return "redirect:/project/create";
     }
+
 
     @GetMapping("/complete/{projectcode}")
     public String completeProject(@PathVariable("projectcode") String projectcode) {
         projectService.complete(projectcode);
         return "redirect:/project/create";
     }
+
 
     @GetMapping("/update/{projectcode}")
     public String editProject(@PathVariable("projectcode") String projectcode, Model model) {
@@ -76,6 +77,7 @@ public class ProjectController {
         return "redirect:/project/create";
     }
 
+
     @GetMapping("/manager/complete")
     public String getProjectByManager(Model model) {
 
@@ -92,5 +94,4 @@ public class ProjectController {
 
         return "redirect:/project/manager/complete";
     }
-
 }
