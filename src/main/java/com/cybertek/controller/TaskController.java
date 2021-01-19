@@ -109,6 +109,8 @@ public class TaskController {
     @GetMapping("/employee/archive")
     public String employee_archive(Model model){
 
-        List<TaskDTO>tasks = taskService.l
+        List<TaskDTO>tasks = taskService.listAllTasksByStatus(Status.COMPLETE);
+        model.addAttribute("tasks", tasks);
+        return "task/employee-archive";
     }
 }
