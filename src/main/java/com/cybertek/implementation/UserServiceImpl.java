@@ -4,11 +4,13 @@ import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.TaskDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.User;
+import com.cybertek.exception.TicketingProjectException;
 import com.cybertek.mapper.UserMapper;
 import com.cybertek.repository.UserRepository;
 import com.cybertek.service.ProjectService;
 import com.cybertek.service.TaskService;
 import com.cybertek.service.UserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class UserServiceImpl implements UserService {
     ProjectService projectService;
     TaskService taskService;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, ProjectService projectService, TaskService taskService) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, @Lazy ProjectService projectService, TaskService taskService) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.projectService = projectService;
@@ -67,8 +69,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(String username) {
+    public void delete(String username) throws TicketingProjectException {
         User user = userRepository.findByUserName(username);
+
+        if (user == null) {
+            throw new TicketingProjectException("User Does not Exist");
+        }
+
+        if (!checkIfUserCanBeDeleted(user)) {
+            throw new TicketingProjectException("User can not be deleted. It is linked by a project or task");
+        }
+
+        user.setUserName(user.getUserName() + "-" + user.getId());
+
         user.setIsDeleted(true);
         userRepository.save(user);
     }
